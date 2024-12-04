@@ -9,15 +9,18 @@ console.log(`... ${reports.length} ...`);
 console.log(reports.slice(reports.length-10,reports.length));
 
 const reportsConsecutiveLevelDistance = reports.map(levels => levels.map((level, index) => index > 0 ? level - levels[index - 1] : "S").filter(distance => distance !== "S"));
-const numberOfSafeReports = reportsConsecutiveLevelDistance.filter(distances => {
+const numberOfSafeReports = reportsConsecutiveLevelDistance.filter((distances, index) => {
     const absoluteDistances = distances.map(Math.abs);
-    console.log(absoluteDistances);
+    //console.log(absoluteDistances);
     const minDistance = Math.min(...absoluteDistances);
-    console.log(minDistance);
+    //console.log(minDistance);
     const maxDistance = Math.max(...absoluteDistances);
-    console.log(maxDistance);
+    //console.log(maxDistance);
     const allDistancesAreOfTheSameSign = distances.every(distance => distance > 0) || distances.every(distance => distance < 0);
-    console.log(allDistancesAreOfTheSameSign);
+    //console.log(allDistancesAreOfTheSameSign);
+    if (!(allDistancesAreOfTheSameSign && minDistance > 0 && maxDistance <= 3)) {
+        console.log(JSON.stringify([index, distances, reports[index]]))
+    }
     return allDistancesAreOfTheSameSign && minDistance > 0 && maxDistance <= 3
 }).length;
 console.log(`Number of safe reports: ${numberOfSafeReports}`);
