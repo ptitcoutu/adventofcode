@@ -15,6 +15,33 @@
             "program": "${file}",
             "outputCapture": "std",
             "attachSimplePort": 9229
+        },
+        {
+            "name": "Deno Test Debug",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "test",
+                "--inspect-brk",
+                "--allow-all",
+                "--fail-fast"
+            ],
+            "attachSimplePort": 9229
+        },
+        {
+            "name": "Deno Test Current File",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [
+                "test",
+                "--allow-all",
+                "${file}"
+            ],
+            "attachSimplePort": 9229
         }
     ]
 }
